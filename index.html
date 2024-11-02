@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app">
+      <div class="mainPageContainer">
+        <h1>PONG</h1>
+        <button class="playButton" onclick="goto('gameEnter')">ENTER</button>
+        <button class="playButton" onclick="goto('options')">OPTIONS</button>
+        <div class="backgroundCanvasContainer">
+            <canvas id="backgroundCanvas"></canvas>
+        </div>
+      </div>
+        <div class="gameContainer">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+        <div class="optionsContainer">
+            <h1 class="mainHeaders">OPTIONS</h1>
+          <h1 class="subHeaders">THEMES</h1>
+          <div class="themeContainer">
+            <div class="themeButtonContainer">
+              <button class="themeButton">DEFAULT</button>
+              <button class="themeButton">DARK</button>
+              <button class="themeButton">LIGHT</button>
+              <button class="themeButton">DRACULA</button>
+              <button class="themeButton">NORD</button>
+              <button class="themeButton">CATPPUCCIN</button>
+              <button class="themeButton">SOLARIZED</button>
+            </div>
+          </div>
+          <h1 class="subHeaders">GAME OPTIONS</h1>
+          <div class="gameOptionsContainer">
+            <label for="ballSizeSlider">Ball Size</label>
+            <input type="range" min="5" max="60" value="5" class="slider" id="ballSizeSlider">
+
+            <label for="paddleWidthSlider">Paddle Width</label>
+            <input type="range" min="5" max="50" value="5" class="slider" id="paddleWidthSlider">
+
+            <label for="paddleHeightSlider">Paddle Height</label>
+            <input type="range" min="5" max="150" value="5" class="slider" id="paddleHeightSlider">
+          </div>
+          <div class="soundOptionsContainer">
+            <h1 class="subHeaders">SOUND OPTIONS</h1>
+            <label for="volumeSlider">Volume</label>
+            <input type="range" min="0" max="100" value="50" class="slider" id="volumeSlider">
+          </div>
+          <button class="backButton" onclick="goto('main')">BACK</button>
+        </div>
+      <div class="gameEnterContainer">
+        <h1>SELECT GAME MODE</h1>
+        <div class="gamemodeContainer">
+            <button class="gamemodeButton playButton" id="pvp">Player vs Player</button>
+            <button class="gamemodeButton playButton" id="pve">Player vs Computer</button>
+        </div>
+        <div class="difficultyContainer">
+            <button class="difficulty playButton" id="easy">EASY</button>
+            <button class="difficulty playButton" id="medium">MEDIUM</button>
+            <button class="difficulty playButton" id="hard">HARD</button>
+            <button class="difficulty playButton" id="impossible">IMPOSSIBLE</button>
+        </div>
+        <button class="playButton go" id="go" disabled>GO!</button>
+      </div>
+      <div class="gameOverContainer">
+        <h1>GAME OVER</h1>
+        <h2 id="winMessage">PLAYER 1 WON</h2>
+        <button class="playButton" onclick="window.location.reload()">REPLAY</button>
+      </div>
+      </div>
+    <script type="module" src="/main.js"></script>
+  <script>
+    function hideAll() {
+      let pages = ['.mainPageContainer', '.gameContainer', '.optionsContainer', '.gameEnterContainer'];
+      for (let i = 0; i < pages.length; i++) {
+        document.querySelector(pages[i]).style.visibility = "hidden";
+        document.querySelector(pages[i]).style.zIndex = "-100";
+      }
+    }
+
+    function goto(page) {
+        hideAll();
+        if (page === 'game') {
+            document.querySelector('.gameContainer').style.visibility = "visible";
+            document.querySelector('.gameContainer').style.zIndex = "100";
+        } else if (page === 'options') {
+            document.querySelector('.optionsContainer').style.visibility = "visible";
+            document.querySelector('.optionsContainer').style.zIndex = "100";
+        } else if (page === 'main') {
+            document.querySelector('.mainPageContainer').style.visibility = "visible";
+            document.querySelector('.mainPageContainer').style.zIndex = "100";
+        } else if (page === 'gameEnter') {
+            document.querySelector('.gameEnterContainer').style.visibility = "visible";
+            document.querySelector('.gameEnterContainer').style.zIndex = "100";
+        }
+    }
+
+  </script>
+  </body>
+</html>

@@ -1,0 +1,247 @@
+*{
+    overflow: hidden;
+    font-family: 'IBM';
+    margin: 0;
+}
+
+@font-face {
+    font-family: 'IBM';
+    src: url('/IBM_BIOS.ttf');
+}
+
+.app{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
+}
+
+.optionsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    gap:20px;
+    z-index: -10;
+    visibility: hidden;
+}
+.themeContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    margin: -10px;
+    max-width: 500px;
+}
+.themeButtonContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.gameOptionsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    max-width: 500px;
+}
+.soundOptionsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    gap: 10px;
+}
+.mainHeaders{
+    font-size: 5em;
+    color: #000;
+    margin-top: 70px;
+}
+.themeButton{
+    color: #1a1a1a;
+    font-size: 1em;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+.backButton{
+    color: #1a1a1a;
+    font-size: 2em;
+    padding: 5px;
+    border: none;
+    cursor: pointer;
+    margin: 5px;
+}
+.themeButton:hover{
+    color: #f9f9f9;
+    background-color: #1a1a1a;
+}
+
+.backButton:hover{
+    color: #f9f9f9;
+    background-color: #1a1a1a;
+}
+
+.slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 10px;
+    background: #ddd;
+    cursor: pointer;
+    border: 2px solid #000;
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #000;
+    cursor: pointer;
+    border: 2px solid #fff;
+    border-left: none;
+    border-radius: 0;
+}
+
+.mainPageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.mainPageContainer h1 {
+    font-size: 5em;
+    color: #000;
+    margin-top: 70px;
+}
+
+.playButton{
+    color: #1a1a1a;
+    font-size: 2em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.playButton:hover{
+    color: #f9f9f9;
+    background-color: #1a1a1a;
+}
+
+.backgroundCanvasContainer{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -10;
+}
+#backgroundCanvas{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+
+.gameContainer{
+    z-index: -100;
+}
+#gameCanvas{
+    z-index: -100;
+    border: 4px solid #000;
+}
+
+.gameEnterContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    z-index: -100;
+}
+
+.gameEnterContainer h1 {
+    font-size: 4em;
+    color: #000;
+    margin-top: 70px;
+}
+
+.gameEnterContainer .playButton{
+    color: #1a1a1a;
+    font-size: 1.5em;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.gameEnterContainer .playButton:hover{
+    color: #f9f9f9;
+    background-color: #1a1a1a;
+}
+
+.gameEnterContainer .go{
+    font-size: 3em;
+    color: #1a1a1a;
+}
+.go:hover{
+    color: #ffffff;
+    background-color: #000000;
+}
+
+.gameOverContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    visibility: hidden;
+    z-index: -100;
+}
+
+.gameOverContainer h1 {
+    font-size: 4em;
+    color: #000;
+    margin-top: 70px;
+}
