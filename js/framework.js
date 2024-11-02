@@ -326,7 +326,7 @@ export class Framework {
     }
     // plays sound
     playSound(sound) {
-        let audio = new Audio('/audio/' + sound);
+        let audio = new Audio('/pong-2024/audio/' + sound);
         audio.volume = this.volume * 2;
         audio.play();
     }
