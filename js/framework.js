@@ -210,9 +210,9 @@ export class Framework {
     collisionCheck() {
         // wrapper for the utils.js collision detection
         let intersecteds = [];
-        for (const i of Framework.physicalObjects) {
+        for (let i of Framework.physicalObjects) {
 
-            for (const j of Framework.physicalObjects) {
+            for (let j of Framework.physicalObjects) {
                 if (i === j || j.userData.physicType === 'border') {
                     continue;
                 }
