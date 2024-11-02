@@ -14,6 +14,8 @@ let mainFw = new FW.Framework(canvas, 800, 600, {adaptive: false, centered: true
 
 mainFw.init();
 setUpBackground();
+
+// game options
 let options = {
     ballSize : 20,
     ballStyle : {
@@ -53,27 +55,10 @@ let mainGame = null;
 let isAudioInit = false;
 let bgm = null;
 
-
-function setUpBackground(){
-    let canvas = document.getElementById('backgroundCanvas');
-    let bgFw = new B_FW.Framework(canvas, 800, 600, {adaptive: true, centered: true, debug: false}, {
-        backgroundColor: 'white',
-        textColor: 'black'
-    });
-    bgFw.init();
-    for (let i = 0; i < 12; i++) {
-        let randomShape = bgFw.createPolygon(6, 30, Math.random() * 500, Math.random() * 500, {
-            fillStyle: "#ffcc00",
-            strokeStyle: 'black',
-            lineWidth: 2
-        });
-        randomShape.velocity = new B_UTILS.Vec2(-Math.random(), Math.random());
-    }
-}
-
 let currentGamemode = null;
 let currentDifficulty = null;
 
+// handle the latching button for the difficulty / type
 let difficulty_buttons = document.getElementsByClassName('difficulty');
 let gamemode_buttons = document.getElementsByClassName('gamemodeButton');
 let isGameStarted = false;
@@ -82,22 +67,22 @@ startButton.disabled = true;
 startButton.style.color = '#696969';
 startButton.addEventListener('click', () => {
     if (startButton.disabled) return;
-    if (isGameStarted) return;
-    isGameStarted = true;
+    if (isGameStarted) return; // no double clikcing
+    isGameStarted = true; 
     startButton.style.color = '#ffffff';
     startButton.style.backgroundColor = '#000000';
     setTimeout(() => {
-        hideAll();
-        document.querySelector('.gameContainer').style.visibility = "visible";
+        hideAll(); // hide everything else
+        document.querySelector('.gameContainer').style.visibility = "visible"; // move game container to the front
         document.querySelector('.gameContainer').style.zIndex = "100";
         if (currentGamemode === 'pvp') currentGamemode = 'single';
-        updateOptions();
+        updateOptions(); // change the options of the game according to the sliders
         mainGame = new GAME.Pong(mainFw, options);
-        mainGame.begin(currentDifficulty, currentGamemode);
+        mainGame.begin(currentDifficulty, currentGamemode); // BEGIN!
     }, 500);
 });
 
-for (let button of difficulty_buttons){
+for (let button of difficulty_buttons){ // latching the correct button
     button.addEventListener('click', () => {
         currentDifficulty = button.id;
         resetButtons(difficulty_buttons);
@@ -115,32 +100,31 @@ for (let button of gamemode_buttons){
     });
 }
 
-function resetButtons(buttons) {
+function resetButtons(buttons) { / reset the buttons that is not selected
     for (let button of buttons){
         button.style.backgroundColor = '#f9f9f9';
     }
 }
 
-function checkEnableStart(){
+function checkEnableStart(){ // check if the game can start or not (gamemode&difficulty present)
     if (currentGamemode && currentDifficulty){
         document.getElementById('go').disabled = false;
         document.getElementById('go').style.color = 'black';
     }
 }
 
-function hideAll() {
+function hideAll() { 
     let pages = ['.mainPageContainer', '.gameContainer', '.optionsContainer', '.gameEnterContainer', '.gameOverContainer'];
-    for (let i = 0; i < pages.length; i++) {
-        document.querySelector(pages[i]).style.visibility = "hidden";
-        document.querySelector(pages[i]).style.zIndex = "-100";
+    for (let page in pages) {
+        document.querySelector(page).style.visibility = "hidden";
+        document.querySelector(page).style.zIndex = "-100";
     }
 }
 
-
-// HANDLE VALUE SLIDERS
+// HANDLE VALUE SLIDERS in options
 let volume = document.getElementById('volumeSlider').innerHTML;
 let volumeSlider = document.getElementById('volumeSlider');
-
+// we change volume everywhere accordingly
 volumeSlider.oninput = function() {
     volume = this.value;
     if (mainGame) {
@@ -151,7 +135,23 @@ volumeSlider.oninput = function() {
         bgm.volume = this.value/200;
     }
 }
+// work around to blocked autoplay
+addEventListener('mousedown', () => {
+    if (!isAudioInit) {
+        playBGM();
+        isAudioInit = true;
+    }
+});
 
+function playBGM() {
+    bgm = new Audio('/pong-2024/audio/bgm.mp3');
+    bgm.loop = true;
+    bgm.volume = 0.5/2;
+    bgm.play();
+}
+
+
+// config of the sliders
 function getConfig() {
     let ballSize = document.getElementById('ballSizeSlider').value;
 
@@ -165,7 +165,7 @@ function getConfig() {
         paddleHeight: paddleHeight
     }
 }
-
+// we don't change de feult value in the options if the user did not change anything
 function updateOptions() {
     let config = getConfig();
     if (config.ballSize == 5 || config.paddleWidth == 5 || config.paddleHeight == 5) return;
@@ -175,16 +175,20 @@ function updateOptions() {
     console.log(options);
     return options;
 }
-
-addEventListener('mousedown', () => {
-    if (!isAudioInit) {
-        playBGM();
-        isAudioInit = true;
+// backgroung canvas animation
+function setUpBackground(){
+    let canvas = document.getElementById('backgroundCanvas');
+    let bgFw = new B_FW.Framework(canvas, 800, 600, {adaptive: true, centered: true, debug: false}, {
+        backgroundColor: 'white',
+        textColor: 'black'
+    });
+    bgFw.init();
+    for (let i = 0; i < 12; i++) {
+        let randomShape = bgFw.createPolygon(6, 30, Math.random() * 500, Math.random() * 500, {
+            fillStyle: "#ffcc00",
+            strokeStyle: 'black',
+            lineWidth: 2
+        });
+        randomShape.velocity = new B_UTILS.Vec2(-Math.random(), Math.random());
     }
-});
-function playBGM() {
-    bgm = new Audio('/audio/bgm.mp3');
-    bgm.loop = true;
-    bgm.volume = 0.5/2;
-    bgm.play();
 }
