@@ -100,7 +100,7 @@ for (let button of gamemode_buttons){
     });
 }
 
-function resetButtons(buttons) { / reset the buttons that is not selected
+function resetButtons(buttons) { // reset the buttons that is not selected
     for (let button of buttons){
         button.style.backgroundColor = '#f9f9f9';
     }
