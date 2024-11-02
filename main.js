@@ -115,7 +115,7 @@ function checkEnableStart(){ // check if the game can start or not (gamemode&dif
 
 function hideAll() { 
     let pages = ['.mainPageContainer', '.gameContainer', '.optionsContainer', '.gameEnterContainer', '.gameOverContainer'];
-    for (let page in pages) {
+    for (let page of pages) {
         document.querySelector(page).style.visibility = "hidden";
         document.querySelector(page).style.zIndex = "-100";
     }
